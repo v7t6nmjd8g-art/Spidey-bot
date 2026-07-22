@@ -26,6 +26,7 @@ async def check_leaks():
 @bot.event
 async def on_ready():
     print(f"🕷️ Spidey bot est connecté en tant que {bot.user}")
+  print("TEST NOUVELLE VERSION")
     check_leaks.start()
 @bot.command()
 async def ping(ctx):

@@ -2,15 +2,17 @@ import os
 import discord
 from discord.ext import commands, tasks
 import feedparser
+
 TOKEN = os.getenv("DISCORD_TOKEN")
 RSS_URL = "https://rss.app/feeds/WtYR8fnVhYK9yQRI.xml"
+
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix="!" , intents=intents)
-@bot.event 
-async def on_ready ():
-  print(f"🕷️ Spidey bot est connecté en tant que {bot.user}")
-  @tasks.loop(minutes=5)
+
+bot = commands.Bot(command_prefix="!", intents=intents)
+
+
+@tasks.loop(minutes=5)
 async def check_leaks():
     feed = feedparser.parse(RSS_URL)
 
@@ -23,17 +25,22 @@ async def check_leaks():
                 f"🚨 Nouveau leak CODM !\n{latest.title}\n{latest.link}"
             )
 
+
 @bot.event
 async def on_ready():
     print(f"🕷️ Spidey bot est connecté en tant que {bot.user}")
-  print("TEST NOUVELLE VERSION")
+    print("TEST NOUVELLE VERSION")
     check_leaks.start()
+
+
 @bot.command()
 async def ping(ctx):
-  await ctx.send ("🏓 pong ! spidey bot fonctionne.")
+    await ctx.send("🏓 pong ! spidey bot fonctionne.")
+
+
 @bot.command()
 async def testleak(ctx):
     await ctx.send("🚨 Test leak CODM : Spidey Bot fonctionne !")
 
-bot.run(TOKEN) 
 
+bot.run(TOKEN)

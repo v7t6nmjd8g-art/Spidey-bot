@@ -36,3 +36,4 @@ async def testleak(ctx):
     await ctx.send("🚨 Test leak CODM : Spidey Bot fonctionne !")
 
 bot.run(TOKEN) 
+

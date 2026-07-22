@@ -15,7 +15,7 @@ async def check_leaks():
     feed = feedparser.parse(RSS_URL)
 
     if feed.entries:
-        channel = discord.utils.get(bot.get_all_channels(), name="codm-leaks")
+        channel = discord.utils.get(bot.get_all_channels(), name="⌁・leaks")
 
         if channel:
             latest = feed.entries[0]

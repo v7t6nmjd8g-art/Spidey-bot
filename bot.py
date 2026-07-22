@@ -30,4 +30,8 @@ async def on_ready():
 @bot.command()
 async def ping(ctx):
   await ctx.send ("🏓 pong ! spidey bot fonctionne.")
+@bot.command()
+async def testleak(ctx):
+    await ctx.send("🚨 Test leak CODM : Spidey Bot fonctionne !")
+
 bot.run(TOKEN) 

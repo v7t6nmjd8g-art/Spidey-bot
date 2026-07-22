@@ -6,6 +6,8 @@ import feedparser
 TOKEN = os.getenv("DISCORD_TOKEN")
 RSS_URL = "https://rss.app/feeds/WtYR8fnVhYK9yQRI.xml"
 
+last_leak = None
+
 intents = discord.Intents.default()
 intents.message_content = True
 
@@ -14,16 +16,25 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @tasks.loop(minutes=5)
 async def check_leaks():
+    global last_leak
+
     feed = feedparser.parse(RSS_URL)
 
     if feed.entries:
+        latest = feed.entries[0]
+
+        # Empêche d'envoyer le même leak plusieurs fois
+        if latest.link == last_leak:
+            return
+
         channel = discord.utils.get(bot.get_all_channels(), name="⌁・leaks")
 
         if channel:
-            latest = feed.entries[0]
             await channel.send(
                 f"🚨 Nouveau leak CODM !\n{latest.title}\n{latest.link}"
             )
+
+            last_leak = latest.link
 
 
 @bot.event

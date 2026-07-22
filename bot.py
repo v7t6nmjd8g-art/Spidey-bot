@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import feedparser
 TOKEN = os.getenv("DISCORD_TOKEN")
+RSS_URL = "https://rss.app/feeds/WtYR8fnVhYK9yQRI.xml"
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="!" , intents=intents)
